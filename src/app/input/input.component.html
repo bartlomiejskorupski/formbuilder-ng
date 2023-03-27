@@ -1,5 +1,11 @@
 <div class="input-row" [ngStyle]="{'margin-left': marginLeft}">
-  <p>Question: {{ input.question }}</p>
-  <p>Type: {{ input.type }}</p>
-  <p>Indentation: {{ input.indent }}</p>
+  <label for="question">Question</label>
+  <input name="question" id="question" placeholder="Your question..." [(ngModel)]="input.question">
+  <br>
+  <label for="type">Type </label>
+  <select name="type" id="type">
+    <option *ngFor="let opt of options" [value]="opt">{{ opt }}</option>
+  </select>
+  <button (click)="addSubinputClick()">Add Sub-Input</button>
+  <button class="delete-button" (click)="deleteCLick()">Delete</button>
 </div>

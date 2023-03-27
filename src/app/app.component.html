@@ -1,6 +1,11 @@
 <div class="container">
   <app-input
     *ngFor="let input of inputs"
-    [input]="input">
+    [input]="input"
+    (addSubinput)="addSubinputClick($event)"
+    (deleteInput)="deleteInputClick($event)">
   </app-input>
+  <div class="button-container">
+    <button (click)="addInputClick()">Add Input</button>
+  </div>
 </div>
