@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { InputModel, InputType } from './input.model';
+import { InputService } from './input.service';
 
 @Component({
   selector: 'app-input',
@@ -14,7 +15,9 @@ export class InputComponent implements OnInit{
   options: string[] = Object.values(InputType);
   marginLeft: string;
   
-  constructor() {}
+  constructor(
+    private inputService: InputService
+  ) {}
 
   ngOnInit(): void {
     this.marginLeft = (this.input.indent)*30+'px';
@@ -26,6 +29,12 @@ export class InputComponent implements OnInit{
 
   deleteCLick() {
     this.deleteInput.emit(this.input);
+  }
+
+  inputChange() {
+    this.inputService.inputsChanged();
+    console.log('change');
+    
   }
 
 }

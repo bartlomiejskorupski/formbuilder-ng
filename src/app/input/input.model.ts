@@ -6,8 +6,9 @@ export enum InputType {
 }
 
 export interface InputModel {
+  id: number;
   question: string;
   type: InputType;
   indent: number;
-  subinputs: InputModel[];
+  subinputs: number[];
 }

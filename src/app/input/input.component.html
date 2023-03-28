@@ -1,9 +1,14 @@
 <div class="input-row" [ngStyle]="{'margin-left': marginLeft}">
   <label for="question">Question</label>
-  <input name="question" id="question" placeholder="Your question..." [(ngModel)]="input.question">
+  <input 
+    name="question" 
+    id="question" 
+    placeholder="Your question..." 
+    [(ngModel)]="input.question"
+    (input)="inputChange()">
   <br>
   <label for="type">Type </label>
-  <select name="type" id="type">
+  <select name="type" id="type" (change)="inputChange()">
     <option *ngFor="let opt of options" [value]="opt">{{ opt }}</option>
   </select>
   <button (click)="addSubinputClick()">Add Sub-Input</button>

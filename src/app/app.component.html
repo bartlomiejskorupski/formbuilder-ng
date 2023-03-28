@@ -1,6 +1,6 @@
 <div class="container">
   <app-input
-    *ngFor="let input of inputs"
+    *ngFor="let input of inputs$ | async"
     [input]="input"
     (addSubinput)="addSubinputClick($event)"
     (deleteInput)="deleteInputClick($event)">
