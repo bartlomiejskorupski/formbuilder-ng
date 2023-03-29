@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { InputModel, InputType } from './input.model';
+import { InputModel, InputType, POSSIBLE_EXPRESSIONS } from './input.model';
 import { InputService } from './input.service';
 
 @Component({
@@ -15,12 +15,19 @@ export class InputComponent implements OnInit{
   options: string[] = Object.values(InputType);
   marginLeft: string;
   
+  parent: InputModel;
+  possible_expressions: {[type:string]:string[]};
+
   constructor(
     private inputService: InputService
   ) {}
 
   ngOnInit(): void {
     this.marginLeft = (this.input.indent)*30+'px';
+
+    this.possible_expressions = POSSIBLE_EXPRESSIONS;
+    if(this.input.parentId)
+      this.parent = this.inputService.getInput(this.input.parentId);
   }
 
   addSubinputClick() {
@@ -33,8 +40,6 @@ export class InputComponent implements OnInit{
 
   inputChange() {
     this.inputService.inputsChanged();
-    console.log('change');
-    
   }
 
 }

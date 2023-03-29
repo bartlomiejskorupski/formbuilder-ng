@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
-import { InputModel, InputType } from "./input.model";
+import { InputModel, InputType, POSSIBLE_EXPRESSIONS } from "./input.model";
 
 @Injectable({ providedIn: 'root' })
 export class InputService {
@@ -47,7 +47,7 @@ export class InputService {
     return this.inputs.findIndex(val => val.id === input.id);
   }
 
-  private getInput(id: number): InputModel {
+  getInput(id: number): InputModel {
     return this.inputs.filter(inp => inp.id === id)[0];
   }
 
@@ -61,7 +61,10 @@ export class InputService {
       question: '',
       type: parent.type,
       indent: parent.indent + 1,
-      subinputs: []
+      subinputs: [],
+      parentId: parent.id,
+      expression: POSSIBLE_EXPRESSIONS[parent.type][0],
+      condition: ''
     };
     parent.subinputs.push(subinput.id);
     

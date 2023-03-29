@@ -5,10 +5,19 @@ export enum InputType {
   STRING = 'String'
 }
 
+export const POSSIBLE_EXPRESSIONS = {
+  'Yes/No': ['Equals'],
+  'Numeric': ['Equal', "Not equal", 'Less than', 'Greater than'],
+  'String': ['Equal', 'Not equal']  
+}
+
 export interface InputModel {
   id: number;
-  question: string;
   type: InputType;
+  question: string;
   indent: number;
+  expression?: string;
+  condition?: string;
   subinputs: number[];
+  parentId?: number;
 }

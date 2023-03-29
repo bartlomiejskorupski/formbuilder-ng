@@ -1,4 +1,40 @@
 <div class="input-row" [ngStyle]="{'margin-left': marginLeft}">
+
+  <ng-template [ngIf]="parent">
+    <label for="expression">Show if</label>
+    <select
+      name="expression"
+      id="expression" 
+      (change)="inputChange()"
+      [(ngModel)]="input.expression">
+      <option 
+        *ngFor="let expression of possible_expressions[parent.type]"
+        [value]="expression">
+        {{ expression }}
+      </option>
+    </select>
+    <ng-template [ngIf]="parent.type === 'Yes/No'" [ngIfElse]="notYesNo">
+      <label for="condition">Condition</label>
+      <select
+        name="condition"
+        id="condition" 
+        (change)="inputChange()"
+        [(ngModel)]="input.condition">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+    </ng-template>
+    <ng-template #notYesNo>
+      <label for="condition">Condition</label>
+      <input 
+        name="condition" 
+        id="condition" 
+        placeholder="Your condition..." 
+        [(ngModel)]="input.condition"
+        (input)="inputChange()">
+    </ng-template>
+  </ng-template>
+
   <label for="question">Question</label>
   <input 
     name="question" 
@@ -6,10 +42,17 @@
     placeholder="Your question..." 
     [(ngModel)]="input.question"
     (input)="inputChange()">
-  <br>
   <label for="type">Type </label>
-  <select name="type" id="type" (change)="inputChange()">
-    <option *ngFor="let opt of options" [value]="opt">{{ opt }}</option>
+  <select
+    name="type"
+    id="type" 
+    (change)="inputChange()" 
+    [(ngModel)]="input.type">
+    <option
+      *ngFor="let opt of options"
+      [value]="opt">
+      {{ opt }}
+    </option>
   </select>
   <button (click)="addSubinputClick()">Add Sub-Input</button>
   <button class="delete-button" (click)="deleteCLick()">Delete</button>
